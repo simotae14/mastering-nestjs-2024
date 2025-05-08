@@ -5,10 +5,10 @@ import { Product } from './products.model';
 export class ProductsService {
   private product: Product[] = [];
 
-  insertProduct(title: string, desc: string, price: number) {
+  insertProduct(title: string, description: string, price: number) {
     const id = Math.floor(Math.random() * Date.now()).toString(16);
 
-    const newProduct = new Product(id, title, desc, price);
+    const newProduct = new Product(id, title, description, price);
 
     this.product.push(newProduct);
 
@@ -33,9 +33,9 @@ export class ProductsService {
   updateProduct(
     id: string,
     productData: {
-      title: string | null;
-      description: string | null;
-      price: number | null;
+      title?: string | null;
+      description?: string | null;
+      price?: number | null;
     },
   ) {
     const [product, index] = this.findProduct(id);
@@ -56,6 +56,25 @@ export class ProductsService {
       ...product,
       ...updatedProduct,
     };
+  }
+
+  partialUpdate(
+    id: string,
+    productData: {
+      title?: string | null;
+      description?: string | null;
+      price?: number | null;
+    },
+  ) {
+    const [product, index] = this.findProduct(id);
+
+    const updatedProduct = {
+      ...product,
+      ...productData,
+    };
+
+    this.product[index] = updatedProduct;
+    return updatedProduct;
   }
 
   private findProduct(id: string): [Product, number] {

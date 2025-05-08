@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Product } from './products.model';
 
@@ -19,7 +19,7 @@ export class ProductsController {
   @Post()
   addProducts(
     @Body('title') pTitle: string,
-    @Body('desc') pDesc: string,
+    @Body('description') pDesc: string,
     @Body('price') pPrice: number,
   ): any {
     const returnedId = this.productService.insertProduct(pTitle, pDesc, pPrice);
@@ -31,6 +31,12 @@ export class ProductsController {
   updateProduct(@Param('id') id: string, @Body() productData: Product) {
     const updatedProduct = this.productService.updateProduct(id, productData);
 
+    return updatedProduct;
+  }
+
+  @Patch(':id')
+  partialUpdate(@Param('id') id: string, @Body() productData: Product) {
+    const updatedProduct = this.productService.partialUpdate(id, productData);
     return updatedProduct;
   }
 }
