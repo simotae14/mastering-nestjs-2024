@@ -13,6 +13,7 @@ export class AuthController {
   @UsePipes(ValidationPipe)
   registerUser(@Body() userData: AuthDto) {
     return {
+      Name: `${userData.name}`,
       Email: `${userData.email}`,
     };
   }
