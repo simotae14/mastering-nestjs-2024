@@ -1,14 +1,16 @@
 import {
   IsAlphanumeric,
   IsEmail,
-  IsEmpty,
   IsNotEmpty,
   IsString,
+  Length,
+  MaxLength,
+  MinLength,
 } from 'class-validator';
 
 export class AuthDto {
-  @IsEmpty()
   @IsString()
+  @Length(3, 20)
   name: string;
 
   @IsEmail()
@@ -17,5 +19,7 @@ export class AuthDto {
 
   @IsAlphanumeric()
   @IsNotEmpty()
+  @MinLength(8)
+  @MaxLength(15)
   password: string;
 }
