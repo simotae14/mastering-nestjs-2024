@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TokenMiddleware } from './middleware/token.middleware';
+import { ContentTypeMiddleware } from './middleware/content-type/content-type.middleware';
 
 @Module({
   imports: [],
@@ -10,6 +10,6 @@ import { TokenMiddleware } from './middleware/token.middleware';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(TokenMiddleware).forRoutes('/getToken');
+    consumer.apply(ContentTypeMiddleware).forRoutes('/client');
   }
 }
