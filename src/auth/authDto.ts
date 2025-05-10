@@ -1,5 +1,7 @@
+import { Type } from 'class-transformer';
 import {
   IsAlphanumeric,
+  IsDateString,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -38,4 +40,8 @@ export class AuthDto {
 
   @IsEnum(Country)
   country: Country;
+
+  @IsDateString()
+  // @Type(() => Date)
+  dob: Date;
 }

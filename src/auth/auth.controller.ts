@@ -16,6 +16,7 @@ export class AuthController {
       Name: `${userData.name}`,
       Email: `${userData.email}`,
       Country: `${userData.country}`,
+      dob: `${userData.dob}`,
     };
   }
 }
