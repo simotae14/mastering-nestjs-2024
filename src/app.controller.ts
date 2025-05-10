@@ -1,17 +1,17 @@
-import { Controller, Get, ParseArrayPipe, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  @Get()
-  getVal(
-    @Query(
-      'num',
-      new ParseArrayPipe({
-        items: Number,
+  @Get(':id')
+  getId(
+    @Param(
+      'id',
+      new ParseUUIDPipe({
+        version: '4',
       }),
     )
-    num: number[],
+    id: string,
   ) {
-    return num;
+    return `Id retrieved: ${id}`;
   }
 }
