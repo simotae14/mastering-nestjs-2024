@@ -19,7 +19,12 @@ export class AuthDto {
 
   @IsAlphanumeric()
   @IsNotEmpty()
-  @MinLength(8)
-  @MaxLength(15)
+  @MinLength(8, {
+    message:
+      'Password is too short, minimal length required is of $constraint1 characters.',
+  })
+  @MaxLength(15, {
+    message: 'Password should be within $constraint1 characters length',
+  })
   password: string;
 }
