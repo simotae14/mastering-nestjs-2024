@@ -1,13 +1,17 @@
-import { Controller, Get, ParseBoolPipe, Query } from '@nestjs/common';
+import { Controller, Get, ParseArrayPipe, Query } from '@nestjs/common';
 
 @Controller()
 export class AppController {
   @Get()
-  getVal(@Query('isActive', ParseBoolPipe) isActive: boolean) {
-    if (isActive) {
-      return 'Welcome Admin';
-    } else {
-      return 'Welcome User';
-    }
+  getVal(
+    @Query(
+      'num',
+      new ParseArrayPipe({
+        items: Number,
+      }),
+    )
+    num: number[],
+  ) {
+    return num;
   }
 }
