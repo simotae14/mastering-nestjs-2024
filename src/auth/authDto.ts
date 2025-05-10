@@ -1,4 +1,3 @@
-import { Type } from 'class-transformer';
 import {
   IsAlphanumeric,
   IsDateString,
@@ -9,6 +8,7 @@ import {
   IsOptional,
   IsString,
   Length,
+  Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -48,7 +48,9 @@ export class AuthDto {
   dob: Date;
 
   @IsOptional()
-  @IsNumber()
-  @MaxLength(11)
-  phone: number;
+  @IsString()
+  @Matches(/^[0-9]{10,11}$/, {
+    message: 'Phone number must be exactly 10 or 11 digits',
+  })
+  phone: string;
 }
