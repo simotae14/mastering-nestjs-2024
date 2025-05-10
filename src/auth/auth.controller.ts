@@ -1,20 +1,19 @@
 import {
-  Body,
   Controller,
+  Body,
   Post,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthDto } from './authDto';
-import { PhoneAuth } from './customPipe/phoneAuth';
+import { CustomPipe } from './customPipe/customPipe';
 
 @Controller('auth')
 export class AuthController {
   @Post('register')
-  @UsePipes(ValidationPipe, PhoneAuth)
-  registerUser(@Body() userData: AuthDto) {
+  @UsePipes(new ValidationPipe(), CustomPipe)
+  registerUser(@Body('name') name: string) {
     return {
-      data: userData,
+      data: name,
     };
   }
 }
