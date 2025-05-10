@@ -5,6 +5,8 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsNumber,
+  IsOptional,
   IsString,
   Length,
   MaxLength,
@@ -44,4 +46,9 @@ export class AuthDto {
   @IsDateString()
   // @Type(() => Date)
   dob: Date;
+
+  @IsOptional()
+  @IsNumber()
+  @MaxLength(11)
+  phone: number;
 }
