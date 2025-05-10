@@ -1,12 +1,20 @@
 import {
   IsAlphanumeric,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsString,
   Length,
   MaxLength,
   MinLength,
 } from 'class-validator';
+
+export enum Country {
+  IND = 'IND',
+  USA = 'USA',
+  UK = 'UK',
+  AUS = 'AUS',
+}
 
 export class AuthDto {
   @IsString()
@@ -27,4 +35,7 @@ export class AuthDto {
     message: 'Password should be within $constraint1 characters length',
   })
   password: string;
+
+  @IsEnum(Country)
+  country: Country;
 }
