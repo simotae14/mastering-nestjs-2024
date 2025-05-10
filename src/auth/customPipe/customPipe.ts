@@ -1,9 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
+import {
+  ArgumentMetadata,
+  Injectable,
+  PipeTransform,
+  BadRequestException,
+} from '@nestjs/common';
 
 @Injectable()
 export class CustomPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
+    if (metadata.metatype === Date) {
+      value = new Date(value);
+      if (isNaN(value.getTime())) {
+        throw new BadRequestException('Invalid date format');
+      }
+      value = value.toUTCString();
+    }
+
     if (metadata.type === 'body' && typeof value === 'string') {
       value = value.toUpperCase();
     } else if (metadata.type === 'param') {
@@ -13,6 +30,7 @@ export class CustomPipe implements PipeTransform {
         value = randomId;
       }
     }
+    console.log(metadata.metatype);
     return value;
   }
 }

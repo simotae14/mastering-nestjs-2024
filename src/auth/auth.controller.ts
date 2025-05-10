@@ -13,7 +13,7 @@ import { CustomPipe } from './customPipe/customPipe';
 export class AuthController {
   @Get('register/:id')
   @UsePipes(new CustomPipe())
-  getId(@Param('id') id: string) {
+  getId(@Param('id') id: number) {
     return {
       data: id,
     };
@@ -21,9 +21,9 @@ export class AuthController {
 
   @Post('register')
   @UsePipes(new ValidationPipe(), CustomPipe)
-  registerUser(@Body('name') name: string) {
+  registerUser(@Body('dob') dob: Date) {
     return {
-      data: name,
+      data: dob,
     };
   }
 }
