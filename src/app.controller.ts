@@ -1,9 +1,13 @@
-import { Controller, Get, Param, ParseFloatPipe } from '@nestjs/common';
+import { Controller, Get, ParseBoolPipe, Query } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  @Get(':id')
-  getId(@Param('id', ParseFloatPipe) id: number) {
-    return `Fetched Id: ${id}`;
+  @Get()
+  getVal(@Query('isActive', ParseBoolPipe) isActive: boolean) {
+    if (isActive) {
+      return 'Welcome Admin';
+    } else {
+      return 'Welcome User';
+    }
   }
 }
