@@ -21,7 +21,7 @@ export class CustomPipe implements PipeTransform {
       value = value.toUTCString();
     }
 
-    if (metadata.type === 'body' && typeof value === 'string') {
+    if (metadata.type === 'body' && metadata.data === 'name') {
       value = value.toUpperCase();
     } else if (metadata.type === 'param') {
       const idLength = parseInt(value as string, 10);
@@ -30,7 +30,7 @@ export class CustomPipe implements PipeTransform {
         value = randomId;
       }
     }
-    console.log(metadata.metatype);
+    console.log(metadata.data);
     return value;
   }
 }

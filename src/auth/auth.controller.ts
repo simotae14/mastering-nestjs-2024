@@ -21,9 +21,17 @@ export class AuthController {
 
   @Post('register')
   @UsePipes(new ValidationPipe(), CustomPipe)
-  registerUser(@Body('dob') dob: Date) {
+  registerUser(
+    @Body('dob') dob: Date,
+    @Body('name') name: string,
+    @Body('email') email: string,
+  ) {
     return {
-      data: dob,
+      data: {
+        dob,
+        name,
+        email,
+      },
     };
   }
 }
