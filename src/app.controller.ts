@@ -1,17 +1,13 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, HttpCode, Res } from '@nestjs/common';
+import { Response } from 'express';
 
 @Controller()
 export class AppController {
-  @Get(':id')
-  fetchQuery(
-    @Param('id') id: string,
-    @Query('name') name: string,
-    @Query('age') age: number,
-  ) {
-    return {
-      Id: `${id}`,
-      Name: `${name}`,
-      Age: `${age}`,
-    };
+  @Get()
+  @HttpCode(204)
+  getAll(@Res() res: Response) {
+    return res.status(200).json({
+      msg: 'This is string message',
+    });
   }
 }
