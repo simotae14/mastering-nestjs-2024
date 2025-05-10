@@ -8,7 +8,6 @@ import {
   IsOptional,
   IsString,
   Length,
-  Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -33,7 +32,7 @@ export class AuthDto {
   @IsNotEmpty()
   @MinLength(8, {
     message:
-      'Password is too short, minimal length required is of $constraint1 characters.',
+      'Password is too short, minimal length required is of $constraint1 characters',
   })
   @MaxLength(15, {
     message: 'Password should be within $constraint1 characters length',
@@ -44,13 +43,9 @@ export class AuthDto {
   country: Country;
 
   @IsDateString()
-  // @Type(() => Date)
   dob: Date;
 
   @IsOptional()
-  @IsString()
-  @Matches(/^[0-9]{10,11}$/, {
-    message: 'Phone number must be exactly 10 or 11 digits',
-  })
-  phone: string;
+  @IsNumber()
+  phone: number;
 }
