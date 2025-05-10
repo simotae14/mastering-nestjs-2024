@@ -1,10 +1,18 @@
-import { Body, Controller, Post } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Req, Controller, Get } from '@nestjs/common';
+import { Request } from 'express';
 
 @Controller()
 export class AppController {
-  @Post()
-  createMsg(@Body() msg: string) {
-    console.log(msg);
-    return 'Message received successfully';
+  @Get()
+  getToken(@Req() req: Request) {
+    const token = req['token'];
+    return { message: 'Access Authorized', token };
+  }
+
+  @Get('getToken')
+  checkToken(@Req() req: Request) {
+    const token = req['token'];
+    return { message: 'Access Authorized', token };
   }
 }
