@@ -10,6 +10,6 @@ import { ContentTypeMiddleware } from './middleware/content-type/content-type.mi
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ContentTypeMiddleware).forRoutes('/client');
+    consumer.apply(ContentTypeMiddleware).forRoutes('client/*');
   }
 }

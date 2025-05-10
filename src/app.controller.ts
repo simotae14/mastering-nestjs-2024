@@ -1,11 +1,25 @@
 import { Controller, Get } from '@nestjs/common';
 
-@Controller()
+@Controller('client')
 export class AppController {
-  @Get('client')
-  checkContentType() {
+  @Get('route1')
+  route1() {
     return {
-      message: 'Welcome to /client route',
+      message: 'This is Route1 under /client',
+    };
+  }
+
+  @Get('route2')
+  route2() {
+    return {
+      message: 'This is Route2 under /client',
+    };
+  }
+
+  @Get('route3')
+  route3() {
+    return {
+      message: 'This is Route3 under /client',
     };
   }
 }
