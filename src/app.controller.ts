@@ -1,12 +1,9 @@
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  @Get()
-  @HttpCode(HttpStatus.BAD_GATEWAY)
-  getAll() {
-    return {
-      status: HttpStatus.BAD_GATEWAY,
-    };
+  @Get(':id')
+  getId(@Param('id', ParseIntPipe) id: number) {
+    return `Fetched Id: ${id}`;
   }
 }
