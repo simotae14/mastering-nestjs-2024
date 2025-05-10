@@ -1,13 +1,12 @@
-import { Controller, Get, HttpCode, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
 
 @Controller()
 export class AppController {
   @Get()
-  @HttpCode(204)
-  getAll(@Res() res: Response) {
-    return res.status(200).json({
-      msg: 'This is string message',
-    });
+  @HttpCode(HttpStatus.BAD_GATEWAY)
+  getAll() {
+    return {
+      status: HttpStatus.BAD_GATEWAY,
+    };
   }
 }
